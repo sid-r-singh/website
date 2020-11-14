@@ -1,0 +1,236 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+  background-image: linear-gradient(45deg,#CE9FFC, #7367F0);
+   font:'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.box {
+  height: 180px;
+  width: 180px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: #020438;
+  border-radius: 100%;
+  overflow: hidden;
+}
+.box .percent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+  display: -webkit-flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  color: #fff;
+  font-size: 64px;
+}
+.box .water {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+  background: #4D6DE3;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.box .water_wave {
+  width: 200%;
+  position: absolute;
+  bottom: 100%;
+}
+.box .water_wave_back {
+  right: 0;
+  fill: #C7EEFF;
+  -webkit-animation: wave-back 3s infinite linear;
+          animation: wave-back 3s infinite linear;
+}
+.box .water_wave_front {
+  left: 0;
+  fill: #4D6DE3;
+  margin-bottom: -1px;
+  -webkit-animation: wave-front 1.5s infinite linear;
+          animation: wave-front 1.5s infinite linear;
+}
+
+@-webkit-keyframes wave-front {
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+  }
+}
+
+@keyframes wave-front {
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+  }
+}
+@-webkit-keyframes wave-back {
+  100% {
+    -webkit-transform: translate(50%, 0);
+            transform: translate(50%, 0);
+  }
+}
+@keyframes wave-back {
+  100% {
+    -webkit-transform: translate(50%, 0);
+            transform: translate(50%, 0);
+  }
+}
+
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  
+  background-color: #F36265;
+position: relative;
+
+  border-radius: 100%;  
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #8080ff;
+
+  overflow: hidden;
+}
+
+
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  max-width: 200px;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  height: 100%;
+  width: 100%;
+  background: #8080ff;
+}
+
+
+
+
+ .progress-bar {
+    background-color: #d6bcfa;
+    height: 5px;
+
+    
+
+    border-radius: 15px;
+    box-shadow:  #ccc, 0 1px 0 #ccc;
+  }
+
+  .progress-bar span {
+    display: flex;
+    height:100%;
+    border-radius: 2px;
+    box-shadow: 0 px 0 rgba(255, 255, 255, .5) inset;
+    transition: width .4s ease-in-out;
+  }
+
+   .shine span {
+    position: relative;
+  }
+ .orange span {
+    background-color: #553c9a;
+    background-image: linear-gradient(top, #5433FF, #20BDFF);
+  }
+  .shine span::after {
+    content: '';
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    border-radius: 3px;
+    animation: animate-shine 2s ease-out infinite;
+  }
+
+  @keyframes animate-shine {
+    0% {
+      opacity: 0;
+      width: 0;
+    }
+    50% {
+      opacity: .5;
+    }
+    100% {
+      opacity: 0;
+      width: 95%;
+    }
+  }
