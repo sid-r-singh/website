@@ -329,7 +329,7 @@ var database = firebase.database();
 var ref = database.ref("Tank1/level");
 var ref2 = database.ref("Tank2/level");
 var ref3 = database.ref("Tank3/level");
-var ctrl1 = database.ref("Controls/ctrl1");
+
 
 ref.on("value", function(snap){
 
@@ -369,7 +369,9 @@ ref3.on("value", function(snap){
 //Switch controls
 function ShowHideDiv(chk) {
       var val = chk.checked ? 1 : 0;
-      ctrl1.set(val");
+      var database = firebase.database();
+      var ctrl1 = database.ref("Controls/ctrl1");
+      ctrl1.set(val);
   }
 
 
