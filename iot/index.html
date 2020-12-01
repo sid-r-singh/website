@@ -107,10 +107,20 @@
 
 <h2>Large</h2>
 <label class="cl-switch cl-switch-large">
-  <input type="checkbox" checked>
+  <input type="checkbox" id="chk" onclick="ShowHideDiv(this)">
   <span class="switcher"></span>
   <span class="label">Toggle Switch</span>
 </label>
+<div id="dvPassport" style="display: none">
+  Passport Number:
+  <input type="text" id="txtPassportNumber" />
+</div>
+<script type="text/javascript">
+  function ShowHideDiv(chk) {
+      var dvPassport = document.getElementById("dvPassport");
+      dvPassport.style.display = chk.checked ? "block" : "none";
+  }
+</script>
 
 
 
