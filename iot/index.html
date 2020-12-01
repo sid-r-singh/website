@@ -106,7 +106,7 @@
 
 
 <h2>Large</h2>
-<label class="cl-switch cl-switch-large">
+<label class="cl-switch-red cl-switch-large">
   <input type="checkbox" id="chk" onclick="ShowHideDiv(this)">
   <span class="switcher"></span>
   <span class="label">Toggle Switch</span>
@@ -115,12 +115,7 @@
   Passport Number:
   <input type="text" id="txtPassportNumber" />
 </div>
-<script type="text/javascript">
-  function ShowHideDiv(chk) {
-      var dvPassport = document.getElementById("dvPassport");
-      dvPassport.style.display = chk.checked ? "block" : "none";
-  }
-</script>
+
 
 
 
@@ -334,6 +329,7 @@ var database = firebase.database();
 var ref = database.ref("Tank1/level");
 var ref2 = database.ref("Tank2/level");
 var ref3 = database.ref("Tank3/level");
+var ctrl1 = database.ref("Controls/ctrl1");
 
 ref.on("value", function(snap){
 
@@ -368,6 +364,13 @@ ref3.on("value", function(snap){
    document.getElementById("tank3_m").style.width = per;
 });
 
+
+
+//Switch controls
+function ShowHideDiv(chk) {
+      var val = chk.checked ? 1 : 0;
+      ctrl1.set(val");
+  }
 
 
 //Modal control
