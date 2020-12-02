@@ -130,7 +130,7 @@
 <div class="py-6">
   <div class="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
     <div class="w-1/3 bg-cover">
-      <img src="Idea-02.jpg" alt="bulb" width="500" height="500">
+      <img src="Idea-02.jpg" id="bulb" alt="bulb" style = "filter: grayscale(100%)" width="500" height="500">
     </div> 
     <div class="w-2/3 p-4">
       <h1 class="text-gray-900 font-bold text-2xl">Control light</h1>
@@ -350,9 +350,15 @@ ref3.on("value", function(snap){
 //Switch controls
 function ShowHideDiv(chk) {
       var val = chk.checked ? 1 : 0;
+      var bulb = document.getElementById("bulb");
       var database = firebase.database();
       var ctrl1 = database.ref("Controls/ctrl1");
       ctrl1.set(val);
+      if(val){
+        bulb.style.filter  = "grayscale(0%)";
+      }
+      else{bulb.style.filter  = "grayscale(100%)";}
+      
   }
 
 
