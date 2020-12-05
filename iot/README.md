@@ -1,3 +1,3 @@
 This is an IOT based water tank level management project. It uses firebase as backend and NodeMCU as the micrcontroller for capturing sensor data from water tanks. The data from sensors is captured and displayed on the following website in realtime. 
 
-[View on my website ⚡️](https://sidrana.dev/iot)
+[View on my website sidrana.dev ⚡️](https://sidrana.dev/iot)
