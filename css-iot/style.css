@@ -66,6 +66,7 @@ body {
 div.transbox {
   padding: 10px;
   width: 50%; margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
   border-radius: 5px;
   opacity: 0.8;
