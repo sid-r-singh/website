@@ -64,8 +64,8 @@ body {
 }
 
 div.transbox {
-  padding: 10px;
-  width: 50%; margin: 0 auto;
+  padding: 12px;
+  width: 60%; margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   background-color: #ffffff;
   border-radius: 5px;
@@ -126,6 +126,11 @@ p {
 .btn:hover {
   color: #005544;
   border-color: #005544;
+}
+
+@media only screen and (max-width: 1300px) {
+ 
+  div.transbox{width:80%}
 }
 
 @media only screen and (max-width: 1000px) {
