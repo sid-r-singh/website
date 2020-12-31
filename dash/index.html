@@ -1,6 +1,9 @@
 <!DOCTYPE html>
     <head>
         <title>Dashboard</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style type="text/css">
         @import url(https://fonts.googleapis.com/css?family=Roboto);
 
@@ -18,31 +21,14 @@
     </head>
     <body>
         <div id="chart"></div>
-        <div class="toolbar">
-            <button id="one_month">
-              1M
-            </button>
-            
-            <button id="six_months">
-              6M
-            </button>
-            
-            <button id="one_year" class="active">
-              1Y
-            </button>
-            
-            <button id="ytd">
-              YTD
-            </button>
-            
-            <button id="all">
-              ALL
-            </button>
+        <div class="flex justify-center" role="group">
+        <div class="inline-flex text-md">
+            <button id="one_month" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-r-0 border-blue-500 rounded-l-lg px-4 py-2 outline-none focus:outline-none focus:bg-blue-500">1 Month</button>
+            <button id="six_months" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500  px-4 py-2 outline-none focus:bg-blue-500 focus:outline-none">6 Months</button>
+            <button id="one_year" class="active bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500  px-4 py-2 outline-none focus:bg-blue-500 focus:outline-none">1 year</button>
+            <button id="ytd" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500  px-4 py-2 outline-none focus:bg-blue-500 focus:outline-none">YTD</button>
+            <button id="all" class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-l-0 border-blue-500 rounded-r-lg px-4 py-2 outline-none focus:bg-blue-500 focus:outline-none">All</button>
         </div>
-        <div class="flex justify-center rounded-lg text-lg" role="group">
-            <button class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-r-0 border-blue-500 rounded-l-lg px-4 py-2 mx-0 outline-none focus:shadow-outline">First</button>
-            <button class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-blue-500  px-4 py-2 mx-0 outline-none focus:shadow-outline">Second</button>
-            <button class="bg-white text-blue-500 hover:bg-blue-500 hover:text-white border border-l-0 border-blue-500 rounded-r-lg px-4 py-2 mx-0 outline-none focus:shadow-outline">Third</button>
         </div>
     
         <script type="text/javascript">
