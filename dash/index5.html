@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Area Chart - Datetime X-Axis</title>
+    <link href="style4.css" rel="stylesheet" />
+
+    <style>
+      
+        #chart {
+        max-width: 650px;
+        margin: 35px auto;
+      }
+    
+      .toolbar {
+        margin-left: 45px;
+      }
+    
+      button {
+        background: #fff;
+        color: #222;
+        border: 1px solid #9eacf7;
+        border-radius:4px;
+        padding: 4px 17px;
+      }
+      button:hover {
+        background-color:#3d65f5;
+        color: #fff;
+        border: 1px solid #9eacf7;
+        cursor:pointer;
+      }
+      button.active {
+        box-shadow: 0px 7px 13px -7px #97c4fe;
+        background-color:#3d65f5;
+        border-radius:4px;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-weight:bold;
+        text-decoration:none;
+        text-shadow:0px 1px 0px #1570cd;
+        border: 1px solid #3d65f5;
+      }
+    
+      button:focus {
+        outline: 0;
+      }
+      
+    </style>
+
+    <script>
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+        )
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+     <div id="chart">
+        <div class="toolbar">
+          <button id="one_month">
+            1M
+          </button>
+          
+          <button id="six_months">
+            6M
+          </button>
+          
+          <button id="one_year" class="active">
+            1Y
+          </button>
+          
+          <button id="ytd">
+            YTD
+          </button>
+          
+          <button id="all">
+            ALL
+          </button>
+        </div>
+      
+        <div id="chart-timeline"></div>
+      </div>
+
+    <script>
+        var options = {
+          series: [{
+          data: series1
+        }],
+          chart: {
+          id: 'area-datetime',
+          type: 'area',
+          height: 350,
+          zoom: {
+            autoScaleYaxis: true
+          }
+        },
+        annotations: {
+          yaxis: [{
+            y: 18,
+            borderColor: '#999',
+            label: {
+              show: true,
+              text: 'Support',
+              style: {
+                color: "#fff",
+                background: '#00E396'
+              }
+            }
+          }],
+          xaxis: [{
+            x: new Date('23 Nov 2019').getTime(),
+            borderColor: '#999',
+            yAxisIndex: 0,
+            label: {
+              show: true,
+              text: 'Bday',
+              style: {
+                color: "#fff",
+                background: '#775DD0'
+              }
+            }
+          }]
+        },
+        dataLabels: {
+          enabled: false
+        },
+        markers: {
+          size: 0,
+          style: 'hollow',
+        },
+        xaxis: {
+          min: new Date('01 Jan 2011').getTime(),
+          max: new Date('31 Dec 2020').getTime(),
+          type: 'datetime',
+        },
+        yaxis: {
+          min:0,
+          max: 30,
+          type: 'numeric',
+        },
+        tooltip: {
+          x: {
+            format: 'dd MMM yyyy'
+          }
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 100]
+          }
+        },
+        };
+
+
+    var series1 = [];
+    var i = 0;
+    $.when( 
+    $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Date.json?orderBy="$key"&limitToFirst=3651'), 
+    $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Temp.json?orderBy="$key"&limitToFirst=3651') )
+        .done(
+                function( a1, a2 ) {
+                    // a1 and a2 are arguments resolved for the page1 and page2 ajax requests, respectively.
+                    // Each argument is an array with the following structure: [ data, statusText, jqXHR ]
+                    for(var i = 0; i < 3651; i++) {
+                        series1.push( [ a1[0][i], a2[0][i] ] );
+                    }
+                }
+
+            var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
+            chart.render();
+            
+           );
+
+        
+      
+
+
+
+      //Buttons
+        var resetCssClasses = function(activeEl) {
+        var els = document.querySelectorAll('button')
+        Array.prototype.forEach.call(els, function(el) {
+          el.classList.remove('active')
+        })
+      
+        activeEl.target.classList.add('active')
+      }
+      
+      document
+        .querySelector('#one_month')
+        .addEventListener('click', function(e) {
+          resetCssClasses(e)
+      
+          chart.zoomX(
+            new Date().setMonth(-1),
+            Date.now()
+          )
+        })
+      
+      document
+        .querySelector('#six_months')
+        .addEventListener('click', function(e) {
+          resetCssClasses(e)
+      
+          chart.zoomX(
+            new Date().setMonth(-6),
+            Date.now()
+          )
+        })
+      
+      document
+        .querySelector('#one_year')
+        .addEventListener('click', function(e) {
+          resetCssClasses(e)
+          chart.zoomX(
+            new Date().setMonth(-12),
+            Date.now()
+          )
+        })
+      
+      document.querySelector('#ytd').addEventListener('click', function(e) {
+        resetCssClasses(e)
+      
+        chart.zoomX(
+          new Date('01 Jan 1989').getTime(),
+          new Date('01 Jul 1989').getTime()
+        )
+      })
+      
+      document.querySelector('#all').addEventListener('click', function(e) {
+        resetCssClasses(e)
+      
+        chart.zoomX(
+          new Date('01 Jan 1981').getTime(),
+          new Date('01 Dec 1989').getTime()
+        )
+      })
+      
+    </script>
+
+    
+  </body>
+</html>

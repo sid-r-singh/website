@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<head>
+    <title>Charting trial 3</title>
+    
+</head>
+
+<body>
+    <div id="chart">
+        <div id="timeline-chart"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+            var series = [];
+var options = {
+      chart: {
+        type: "area",
+        height: 400,
+        foreColor: "#999",
+        stacked: true,
+        dropShadow: {
+          enabled: true,
+          enabledSeries: [0],
+          top: -2,
+          left: 2,
+          blur: 5,
+          opacity: 0.06
+        }
+      },
+      colors: ['#00E396', '#0090FF'],
+      stroke: {
+        curve: "smooth",
+        width: 3
+      },
+      dataLabels: {
+        enabled: false
+      },
+      series: [{
+        name: 'Total Views',
+        data: series
+      }],
+      markers: {
+        size: 0,
+        strokeColor: "#fff",
+        strokeWidth: 3,
+        strokeOpacity: 1,
+        fillOpacity: 1,
+        hover: {
+          size: 6
+        }
+      },
+      xaxis: {
+        type: "datetime",
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        }
+      },
+      yaxis: {
+        
+        tooltip: {
+          enabled: true
+        }
+      },
+      grid: {
+        padding: {
+          left: -5,
+          right: 5
+        }
+      },
+      tooltip: {
+        x: {
+          format: "dd MMM yyyy"
+        },
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'left'
+      },
+      fill: {
+        type: "solid",
+        fillOpacity: 0.7
+      },
+      noData: {
+      text: 'Loading...'
+      }
+    };
+
+    var i = 0;
+      $.when( 
+      $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Date.json?orderBy="$key"&limitToFirst=15'), 
+      $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Temp.json?orderBy="$key"&limitToFirst=15') ).done(
+          function( a1, a2 ) {
+              // a1 and a2 are arguments resolved for the page1 and page2 ajax requests, respectively.
+              // Each argument is an array with the following structure: [ data, statusText, jqXHR ]
+              for(var i = 0; i < 15; i++) {
+                series.push({
+                            x: a1[ 0 ][i],
+                            y: a2[ 0 ][i]
+                          });
+              
+                          console.log('Processed ' + (i+1) +'/15' + ' datapoints' );
+               }
+            
+              
+           });
+
+    var chart = new ApexCharts(document.querySelector("#timeline-chart"), options);
+    chart.render();
+
+
+    </script>
+  </body>
+</html>
