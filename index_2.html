@@ -20,7 +20,52 @@
 
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css">
+	<style type="text/css">
+		/* .container{ border: 2px solid green }
+		.grid-item{ border: 2px solid red; padding: 20px;}
+		.grid{ border: 1px solid blue} */
+		.filters ul{
+		display: flex;
+		justify-content: center;
+		list-style: none;
+		border-bottom: 2px solid #D9D9D9;
+		margin: 30px 15px
+		}
+		.filters ul li{
+		display: inlnie-block;
+		text-align: center;
+		margin-right: 12px;
+		padding: 0 5px 8px 5px;
+		font-weight: 700;
+		font-size: 16px; 
+		cursor: pointer;
+		position: relative;
+		margin-bottom: -2px;
+		color: #777;
+		transition: 0.3s;
+		text-transform: uppercase;
+		}
+		.filters ul li:hover{
+		color: #EB2D3A;
+		}
+		.filters ul li.is-checked{
+		border-bottom: 2px solid #EB2D3A;
+		}
+		.filters ul li:last-child{
+		margin-right: 0;
+		}
+		
+		.grid .grid-item h1{
+		background: #EEEEEE;
+		height: 150px;
+		line-height: 150px;
+		color: white;
+		font-size: 3em;
+		text-align: center;
+		margin-bottom: 30px;
+		}
+	</style>
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
@@ -552,6 +597,69 @@
     	</div>
     </section>
 
+<!--Isotope begins-->
+
+	<div class="container">
+		<div class="row">
+		  <div class="col-md-12">
+			<div class="filters">
+			  <ul>
+				<li class="is-checked" data-filter="*">All</li>
+				<li data-filter=".idea">!dea</li>
+				<li data-filter=".ui">UI</li>
+				<li data-filter=".ux">UX</li>
+				<li data-filter=".code">Code</li>
+				<li data-filter=".logic">Logic</li>
+				<li data-filter=".creativity">Creativity</li>
+			  </ul>
+			</div>
+		  </div>
+		  
+		  <div class="col-md-12">
+			<div class="rows grid data-isotope='{ "itemSelector": ".grid-item", "masonry": { "columnWidth": 200 } }'">
+			  <div class="col-md-3 grid-item logic" data-category="websites">
+				<h1>1</h1>
+			  </div>
+			  <div class="col-md-3 grid-item flyers" data-category="flyers">
+				<h1>2</h1>
+			  </div>
+			  <div class="col-md-6 grid-item idea" data-category="ads">
+				<h1>3</h1>
+			  </div>
+			  <div class="col-md-4 grid-item code" data-category="books">
+				<h1>4</h1>
+			  </div>
+			  <div class="col-md-4 grid-item ui" data-category="logos">
+				<h1>5</h1>
+			  </div>
+			  <div class="col-md-4 grid-item ux" data-category="websites">
+				<h1>6</h1>
+			  </div>
+			  <div class="col-md-6 grid-item idea" data-category="ads">
+				<h1>7</h1>
+			  </div>
+			  <div class="col-md-6 grid-item code" data-category="books">
+				<h1>8</h1>
+			  </div>
+			  <div class="col-md-6 grid-item creativity" data-category="books">
+				<h1>9</h1>
+			  </div>
+			  <div class="col-md-2 grid-item creativity" data-category="books">
+				<h1>10</h1>
+			  </div>
+			  <div class="col-md-2 grid-item ux" data-category="books">
+				<h1>11</h1>
+			  </div>
+			  <div class="col-md-2 grid-item creativity" data-category="books">
+				<h1>12</h1>
+			  </div>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+
+	<!--Isotope Ends-->
 
     <section class="ftco-section ftco-project" id="projects-section">
     	<div class="container-fluid px-md-0">
@@ -907,8 +1015,24 @@
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/scrollax.min.js"></script>
-
   <script src="js/main.js"></script>
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script type="text/javascript">
+	var $grid = $('.grid').isotope({
+	  // options
+	  itemSelector: '.grid-item',
+	  layoutMode: 'fitRows',
+	});
 
+	// change is-checked class on buttons
+	var $buttonGroup = $('.filters');
+	$buttonGroup.on( 'click', 'li', function( event ) {
+	  $buttonGroup.find('.is-checked').removeClass('is-checked');
+	  var $button = $( event.currentTarget );
+	  $button.addClass('is-checked');
+	  var filterValue = $button.attr('data-filter');
+	  $grid.isotope({ filter: filterValue });
+	});
+  </script>
   </body>
 </html>
