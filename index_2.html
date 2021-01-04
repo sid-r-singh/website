@@ -134,7 +134,6 @@
 		            	<li class="d-flex"><span>Name:</span> <span>Sidharth Ranasingh</span></li>
 		            	<li class="d-flex"><span>Date of birth:</span> <span>July 08, 2000</span></li>
 		            	<li class="d-flex"><span>Address:</span> <span>Bhubanswar, Odisha, India</span></li>
-		            	<li class="d-flex"><span>Email:</span> <span>ronaldo@gmail.com</span></li>
 		            </ul>
 		          </div>
 		        </div>
@@ -975,11 +974,9 @@
 	// change is-checked class on buttons
 	var $buttonGroup = $('.filters');
 	$buttonGroup.on( 'click', 'li', function( event ) {
-	  $buttonGroup.find('.is-checked').removeClass('is-checked');
-	  var $button = $( event.currentTarget );
-	  $button.addClass('is-checked');
-	  var filterValue = $button.attr('data-filter');
-	  
+	$buttonGroup.find('.is-checked').removeClass('is-checked');
+	var $button = $( event.currentTarget );
+	$button.addClass('is-checked');
 	});
   </script>
   </body>
