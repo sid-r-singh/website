@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Checksum Comparison</h2>
+<h2 id="res">Preess button to check</h2>
+<p>Assign 5 to x, and display the value of the comparison (x === 5):</p>
+
+<p id="demo"></p>
+
+<script>
+function check(){
+var check_h2 = document.getElementById("res");
+x = document.getElementById("t1").value;
+y = document.getElementById("t2").value;
+x1 = x.toLowerCase();
+y1 = y.toLowerCase();
+if (x1===y1){check_h2.innerHTML = "Matcing";check_h2.style.color="green";}
+else{check_h2.innerHTML = "Not Matcing";check_h2.style.color="red";}
+}
+</script>
+<label>#1 (from site)</label>
+<input id="t1" type="text"><br>
+<label>#2 (from 7 zip)</label>
+<input id="t2" type="text"><br><br>
+<button onclick="check()">Check</button>
+</body>
+</html>
