@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Grid.js + jQuery</title>
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/gridjs-jquery/dist/gridjs.development.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+    />
+    <style type="text/css">
+    table,body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;}
+    </style>
+  </head>
+  <body>
+    <h1>
+      Grid.js + jQuery
+    </h1>
+    <div id="wrapper"></div>
+
+    <script>
+    let list = []; let myJson;
+    (function() {
+    var source = "https://api.github.com/repos/sid-r-singh/pythonic/actions/workflows/Update_JSON.yml/runs";
+    $.getJSON( source, {
+      format: "json"
+    })
+    .done(function( data ) {
+        x=data.workflow_runs[2].run_number
+        $('#data').html(x);
+        //console.log(x);
+        
+        function timeDiff(curr, prev) { 
+            var ms_Min = 60 * 1000; // milliseconds in Minute 
+            var ms_Hour = ms_Min * 60; // milliseconds in Hour 
+            var ms_Day = ms_Hour * 24; // milliseconds in day 
+            var ms_Mon = ms_Day * 30; // milliseconds in Month 
+            var ms_Yr = ms_Day * 365; // milliseconds in Year 
+            var diff = curr - prev; //difference between dates. 
+            // If the diff is less then milliseconds in a minute 
+            if (diff < ms_Min) { 
+                let num =Math.round(diff / 1000);
+                return num + ' second' + ( num > 1 ? 's' : '' ) +' ago'; 
+  
+                // If the diff is less then milliseconds in a Hour 
+            } else if (diff < ms_Hour) { 
+                let num = Math.round(diff / ms_Min);
+                return  num + ' minute' + ( num > 1 ? 's' : '' ) +' ago'; 
+  
+                // If the diff is less then milliseconds in a day 
+            } else if (diff < ms_Day) { 
+                let num = Math.round(diff / ms_Hour);
+                return  num+ ' hour'+ ( num > 1 ? 's' : '' ) +' ago'; 
+  
+                // If the diff is less then milliseconds in a Month 
+            } else if (diff < ms_Mon) { 
+                let num = Math.round(diff / ms_Day);
+                return 'Around ' + num + ' day'+ ( num > 1 ? 's' : '' ) +' ago'; 
+
+                // If the diff is less then milliseconds in a year 
+            } else if (diff < ms_Yr) { 
+                let num = Math.round(diff / ms_Mon);
+                return 'Around ' + num + ' month' + ( num > 1 ? 's' : '' ) +' ago'; 
+
+            } else { 
+                let num = Math.round(diff / ms_Yr);
+                return 'Around ' + num + ' year' + ( num > 1 ? 's' : '' ) +' ago'; 
+
+            } 
+        } 
+        var presDate = Date.now();
+       
+        for(let i = 0; i < data.workflow_runs.length; i++){
+            var UTCdt = data.workflow_runs[i].created_at;
+            const utc_zero = new Date(0);
+            var prevDate = Math.floor(new Date(UTCdt)) ;
+            var time_diff_value = timeDiff(presDate, prevDate);
+            //console.log(prevDate);
+            myJson = [data.workflow_runs[i].name, data.workflow_runs[i].run_number, time_diff_value];
+            list.push(myJson);
+        }
+        
+        //console.log(list);
+        $("div#wrapper").Grid({
+        search: true,
+        pagination: true,
+        sort: true,
+        columns: ["Name", "Run no.", "Time"],
+        data: list
+      });
+        
+
+    
+
+    });
+})();
+
+
+      
+     
+    </script>
+  </body>
+</html>
