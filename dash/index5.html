@@ -98,7 +98,27 @@
       </div>
 
     <script>
-        var options = {
+      var series1 = [];
+      var i = 0;
+      $.when( 
+      $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Date.json?orderBy="$key"&limitToFirst=3651'), 
+      $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Temp.json?orderBy="$key"&limitToFirst=3651') )
+        .done(
+                function( a1, a2 ) {
+                    // a1 and a2 are arguments resolved for the page1 and page2 ajax requests, respectively.
+                    // Each argument is an array with the following structure: [ data, statusText, jqXHR ]
+                    for(var i = 0; i < 3651; i++) {
+                        series1.push( [ a1[0][i], a2[0][i] ] );
+                    }
+                
+                
+            
+           });
+       
+
+
+
+          var options = {
           series: [{
           data: series1
         }],
@@ -170,32 +190,10 @@
         },
         };
 
-
-    var series1 = [];
-    var i = 0;
-    $.when( 
-    $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Date.json?orderBy="$key"&limitToFirst=3651'), 
-    $.getJSON('https://mt-iot-brn.firebaseio.com/imported/Temp.json?orderBy="$key"&limitToFirst=3651') )
-        .done(
-                function( a1, a2 ) {
-                    // a1 and a2 are arguments resolved for the page1 and page2 ajax requests, respectively.
-                    // Each argument is an array with the following structure: [ data, statusText, jqXHR ]
-                    for(var i = 0; i < 3651; i++) {
-                        series1.push( [ a1[0][i], a2[0][i] ] );
-                    }
-                }
-
-            var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
-            chart.render();
-            
-           );
-
-        
+        var chart = new ApexCharts(document.querySelector("#chart-timeline"), options);
+        chart.render();
       
-
-
-
-      //Buttons
+      
         var resetCssClasses = function(activeEl) {
         var els = document.querySelectorAll('button')
         Array.prototype.forEach.call(els, function(el) {
